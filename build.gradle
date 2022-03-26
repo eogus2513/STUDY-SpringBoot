@@ -35,3 +35,8 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+//jar파일 한개만 생기도록 설정
+jar {
+    enabled = false
+}
