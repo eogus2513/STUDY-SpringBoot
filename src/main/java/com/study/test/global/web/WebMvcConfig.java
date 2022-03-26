@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    //CORS설정을 해주는 작업
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
