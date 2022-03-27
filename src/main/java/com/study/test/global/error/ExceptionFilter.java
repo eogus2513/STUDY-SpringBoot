@@ -1,6 +1,7 @@
 package com.study.test.global.error;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.test.global.error.ErrorResponse.CustomErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -15,7 +16,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
     //extends OncePerRequestFilter를 하는 이유는 filter로 등록하기 위해서 상속 받는다.
 
     private final ObjectMapper objectMapper;
-    //objectMapper를 DI하는 이유는 error가 나서 ErrorResponse를 해야할 때 json형식으로 변환해주기 위해서 사용한다.
+    //objectMapper를 DI하는 이유는 ErrorResponse를 해야할 때 json형식으로 변환해주기 위해서 사용한다.
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

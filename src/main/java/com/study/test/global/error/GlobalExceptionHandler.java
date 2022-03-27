@@ -1,5 +1,7 @@
 package com.study.test.global.error;
 
+import com.study.test.global.error.ErrorResponse.BindErrorResponse;
+import com.study.test.global.error.ErrorResponse.CustomErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
