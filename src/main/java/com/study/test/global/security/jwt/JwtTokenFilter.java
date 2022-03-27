@@ -14,7 +14,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    //extends OncePerRequestFilter를 하는 이유는 filter로 등록하기 위해서 상속 받는다.
+    //extends OncePerRequestFilter를 하는 이유는 filter로 등록하기 위함이다.
 
     private final JwtTokenProvider jwtTokenProvider;
 
