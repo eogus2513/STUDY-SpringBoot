@@ -31,10 +31,11 @@ public class LoggingFilter extends OncePerRequestFilter {
         ContentCachingRequestWrapper requestWrapper =
                 new ContentCachingRequestWrapper((HttpServletRequest) request);
 
-        filterChain.doFilter(requestWrapper, response);
-
         String requestTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"))
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+
+        filterChain.doFilter(requestWrapper, response);
+
         String requestIP = Optional.ofNullable(request.getHeader("X-Forwarded-For"))
                 .orElse("127.0.0.1");
 
