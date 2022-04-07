@@ -29,7 +29,7 @@ public class LoggingFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         ContentCachingRequestWrapper requestWrapper =
-                new ContentCachingRequestWrapper((HttpServletRequest) request);
+                new ContentCachingRequestWrapper(request);
 
         String requestTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"))
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
@@ -47,17 +47,6 @@ public class LoggingFilter extends OncePerRequestFilter {
                 request.getMethod(),
                 request.getRequestURI(),
                 getRequestBody(requestWrapper));
-    }
-
-    private Map getHeaders(HttpServletRequest request) {
-        Map<Object, Object> headerMap = new HashMap<>();
-
-        Enumeration<String> headerArray = request.getHeaderNames();
-        while (headerArray.hasMoreElements()) {
-            String headerName = (String) headerArray.nextElement();
-            headerMap.put(headerName, request.getHeader(headerName));
-        }
-        return headerMap;
     }
 
     private String getRequestBody(ContentCachingRequestWrapper request) {
