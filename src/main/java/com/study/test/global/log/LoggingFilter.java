@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -27,19 +31,20 @@ public class LoggingFilter extends OncePerRequestFilter {
         ContentCachingRequestWrapper requestWrapper =
                 new ContentCachingRequestWrapper((HttpServletRequest) request);
 
-        long startAt = System.currentTimeMillis();
         filterChain.doFilter(requestWrapper, response);
-        long endAt = System.currentTimeMillis();
+
+        String requestTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"))
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        String requestIP = Optional.ofNullable(request.getHeader("X-Forwarded-For"))
+                .orElse("127.0.0.1");
 
         log.info("\n" +
-                        "[REQUEST] {} - {} {} - {}\n" +
-                        "Headers : {}\n" +
-                        "Request : {}\n",
+                        "{} :: {} [{}] ({} {}) {}\n",
+                requestTime,
+                requestIP,
+                response.getStatus(),
                 request.getMethod(),
                 request.getRequestURI(),
-                response.getStatus(),
-                (endAt - startAt) / 1000.0,
-                getHeaders(request),
                 getRequestBody(requestWrapper));
     }
 
