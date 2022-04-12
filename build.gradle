@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.6.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.sonarqube" version "3.3"
     id 'java'
 }
 
@@ -39,4 +40,12 @@ tasks.named('test') {
 //plain.jar파일 생기지 않도록 설정
 jar {
     enabled = false
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "eogus2513_STUDY-SpringBoot"
+        property "sonar.organization", "eogus2513-sonar-cloud-key"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
