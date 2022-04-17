@@ -42,8 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 /*
                     CORS preflight 요청은 인증처리를 하지 않도록 설정한다.
-                    preflight -> 미리 보내는 것 , 사전 전달이라고 한다.
+                    preflight -> 사전 요청이라고 생각하면 쉽다.
+                             -> 메소드, 출처 등을 허용하는지에 대한 정보를 헤더에 담아 반환한다.
                  */
+
                 .antMatchers(HttpMethod.GET, "/user").authenticated()
                 .antMatchers(HttpMethod.POST, "/user").permitAll()
                 .antMatchers(HttpMethod.POST, "/user/token").permitAll()
